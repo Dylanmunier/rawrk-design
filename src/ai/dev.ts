@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
 config();
 
-import '@/ai/flows/generate-project-description.ts';
-import '@/ai/flows/suggest-project-improvements.ts';
+import '@/ai/flows/suggest-customizations.ts';
+import '@/ai/flows/customization-suggestions.ts';

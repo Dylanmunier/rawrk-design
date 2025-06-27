@@ -1,20 +1,19 @@
-# **App Name**: Project Portal
+# **App Name**: RAWRK Configurator
 
 ## Core Features:
 
-- Home Dashboard: Home dashboard providing a general overview of all existing projects.
-- Project Creation: Project creation form that lets the user to input necessary information, such as title, description, and other details.
-- AI Project Assistant: AI-powered project suggestion tool. Suggest a course of action or improvements to the current approach, by referencing data from similar, successful projects.
-- Project Details Page: Display individual project details, including descriptions, tasks, and timelines.
-- Task Management: List view that helps to monitor tasks, deadlines, and responsibilities of involved users.
-- Export projects: Allows you to download reports and presentations based on the information of each project.
+- Visual RAWRK Catalog: Display high-quality, realistic modified images (wrap, wheels, badges, etc.) of Mercedes vehicles.
+- Tech and RAWRK Specs: Show vehicle tech specs alongside RAWRK options like LED, upholstery, spoiler, sound, and comfort enhancements.
+- AI-Powered Customization Suggestions: Use a generative AI tool to make suggestions to users about customizing a vehicle, using AI to decide when to recommend specific options or colors based on user input. 
+- Online Personalization: Allow users to personalize their chosen model (color, interior style, comfort options) directly on the site.
+- Real-time Price Calculation: Calculate and display the final price, including the vehicle, customization, and delivery costs.
 
 ## Style Guidelines:
 
-- Primary color: Deep Indigo (#4B0082) to convey trust, knowledge, and professionalism, relevant for project management.
-- Background color: Light Lavender (#E6E6FA), a very desaturated near-tone of the primary, creating a light theme with sufficient contrast and visual harmony.
-- Accent color: Violet (#8F00FF), an analogous color with a brighter appearance that is suitable for highlights and interactive elements.
-- Headline font: 'Space Grotesk', sans-serif, with a techy feel, well-suited for headlines; Body font: 'Inter', sans-serif, for comfortable reading of the project descriptions.
-- Use modern, minimalist icons to represent different project actions. Make them easily understandable at a glance.
-- Maintain a clean, grid-based layout. Divide information into logical sections and reduce clutter to enhance usability.
-- Incorporate subtle transition effects during screen navigations. Enhance UX without being intrusive.
+- Primary color: Deep, rich grey (#343A40) to convey luxury and sophistication, echoing the premium vehicle base.
+- Background color: Very dark grey (#212529), nearly black, creating a dramatic contrast and emphasizing the visual elements.
+- Accent color: Electric blue (#7DF9FF), drawn from futuristic automotive design trends, for highlighting interactive elements.
+- Headline font: 'Poppins', a geometric sans-serif for a precise, contemporary, and fashionable look.
+- Body font: 'Inter', a grotesque-style sans-serif for a modern, machined, and neutral feel.
+- Use sharp, minimalist icons representing vehicle features and customization options.
+- Implement subtle, fluid transitions and loading animations to enhance the user experience and convey a sense of luxury.

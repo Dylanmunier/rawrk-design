@@ -1,25 +1,15 @@
-export type User = {
-  id: string;
-  name: string;
-  avatar: string;
-};
+import type { LucideIcon } from "lucide-react";
 
-export type TaskStatus = 'To Do' | 'In Progress' | 'Done' | 'Blocked';
+export interface CustomizationOption {
+  value: string;
+  label: string;
+  price: number;
+  icon?: LucideIcon;
+  color?: string;
+  aliases?: string[];
+}
 
-export type Task = {
-  id: string;
-  title: string;
-  status: TaskStatus;
-  assignee?: User;
-  dueDate: Date;
-};
-
-export type Project = {
-  id: string;
-  title: string;
-  description: string;
-  longDescription?: string;
-  tasks: Task[];
-  team: User[];
-  createdAt: Date;
-};
+export interface Selections {
+  interior: CustomizationOption;
+  comfort: CustomizationOption[];
+}
