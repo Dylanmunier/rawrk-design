@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/components/CartContext";
+import { useToast } from "@/hooks/use-toast";
 
 const SHOP_PRODUCTS: {
   id: string;
@@ -40,6 +42,22 @@ const SHOP_PRODUCTS: {
 ];
 
 export function Shop() {
+  const { addToCart } = useCart();
+  const { toast } = useToast();
+
+  const handleAddToCart = (product: typeof SHOP_PRODUCTS[number]) => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+    });
+    toast({
+      title: "Added to cart",
+      description: `${product.name} has been added to your cart.`,
+    });
+  };
+
   return (
     <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-12">
@@ -67,7 +85,7 @@ export function Shop() {
                 <p className="text-2xl font-bold font-headline text-accent">
                   {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(product.price)}
                 </p>
-                <Button>
+                <Button onClick={() => handleAddToCart(product)}>
                   <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
                 </Button>
               </div>

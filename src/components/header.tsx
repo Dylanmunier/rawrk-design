@@ -7,12 +7,17 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import { useState, useRef, useEffect } from 'react';
+import { useCart } from './CartContext';
+import { Badge } from './ui/badge';
 
 export function Header() {
   const pathname = usePathname();
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const { cart } = useCart();
+  const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
 
   useEffect(() => {
     setIsMounted(true);
@@ -91,9 +96,16 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
+              className="relative"
+              asChild
             >
-              <ShoppingCart className="h-4 w-4" />
-              <span className="sr-only">Cart</span>
+              <Link href="/cart">
+                <ShoppingCart className="h-4 w-4" />
+                {itemCount > 0 && (
+                  <Badge variant="destructive" className="absolute -top-1 -right-1 h-4 w-4 p-0 flex items-center justify-center text-xs">{itemCount}</Badge>
+                )}
+                <span className="sr-only">Cart</span>
+              </Link>
             </Button>
           </nav>
            <div className="md:hidden">
