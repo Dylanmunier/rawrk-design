@@ -83,7 +83,7 @@ export function Shop() {
               <CardDescription className="flex-grow text-muted-foreground mb-4">{product.description}</CardDescription>
               <div className="flex justify-between items-center">
                 <p className="text-2xl font-bold font-headline text-accent">
-                  {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(product.price)}
+                  {new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(product.price)}
                 </p>
                 <Button onClick={() => handleAddToCart(product)}>
                   <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart

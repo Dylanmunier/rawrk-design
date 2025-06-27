@@ -8,24 +8,9 @@ import AdminCrudSection from '@/components/admin-crud-section';
 
 const ADMIN_PASSWORD = "admin123"; // À changer pour la prod !
 
-const mockStats = {
-  revenue: 12450,
-  orders: 87,
-  products: MODELS_DATA.length,
-  users: 4,
-};
-
-const mockOrders = [
-  { id: 101, product: "RAWRK Alpha Strÿk Edition", status: "Livré", amount: 85000 },
-  { id: 102, product: "RAWRK Royal Shadow Edition", status: "En cours", amount: 90000 },
-];
-
-// Ajout d'un champ stock fictif pour la démo
-const withStock = MODELS_DATA.map(m => ({ ...m, stock: Math.floor(Math.random()*10)+1 }));
-
 const sidebarLinks = [
   { key: "dashboard", label: "Vue d'ensemble", icon: "📊" },
-  { key: "products", label: "Modèles", icon: "🚗" },
+  { key: "modeles", label: "Modèles", icon: "🚗" },
   { key: "orders", label: "Commandes", icon: "📦" },
   { key: "clients", label: "Clients", icon: "👤" },
   { key: "admin", label: "Administration", icon: "⚙️" },
@@ -88,8 +73,6 @@ export default function AdminPage() {
   const [models, setModels] = useState<any[]>([]);
   const [orders, setOrders] = useState<any[]>([]);
   const [clients, setClients] = useState(mockClients);
-  const [editId, setEditId] = useState<string|null>(null);
-  const [editModel, setEditModel] = useState<Partial<ModelData & {stock:number}>>({});
   const [editClientId, setEditClientId] = useState<number|null>(null);
   const [editClient, setEditClient] = useState<any>({});
   const [newClient, setNewClient] = useState({ name: "", email: "", phone: "" });
@@ -155,6 +138,11 @@ export default function AdminPage() {
     if (tab === 'modeles') fetchModels();
   }, [tab]);
 
+  useEffect(() => {
+    // We fetch models for the dashboard stats
+    fetchModels();
+  }, []);
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (password === ADMIN_PASSWORD) {
@@ -163,30 +151,6 @@ export default function AdminPage() {
     } else {
       setError("Mot de passe incorrect");
     }
-  };
-
-  const handleEdit = (model: ModelData & {stock:number}) => {
-    setEditId(model.id);
-    setEditModel(model);
-  };
-
-  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
-    setEditModel({ ...editModel, [e.target.name]: e.target.value });
-  };
-
-  const handleEditStock = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditModel({ ...editModel, stock: Number(e.target.value) });
-  };
-
-  const handleSaveEdit = () => {
-    setModels(models.map(m => m.id === editId ? { ...m, ...editModel } : m));
-    setEditId(null);
-    setEditModel({});
-  };
-
-  const handleCancelEdit = () => {
-    setEditId(null);
-    setEditModel({});
   };
 
   // --- CLIENTS ---
@@ -476,54 +440,7 @@ export default function AdminPage() {
             <p className="text-gray-300">Bienvenue sur le dashboard e-commerce administratif du projet.</p>
           </div>
         )}
-        {section === "products" && (
-          <div>
-            <h1 className="text-3xl font-extrabold mb-8 text-yellow-400">Gestion des modèles</h1>
-            <div className="overflow-x-auto">
-              <table className="w-full bg-gray-900/80 rounded-xl shadow border border-gray-800">
-                <thead>
-                  <tr className="border-b border-gray-700 text-yellow-400">
-                    <th className="p-3 text-left">Image</th>
-                    <th className="p-3 text-left">Nom</th>
-                    <th className="p-3 text-left">Prix</th>
-                    <th className="p-3 text-left">Stock</th>
-                    <th className="p-3 text-left">Description</th>
-                    <th className="p-3">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {models.map((m) => (
-                    <tr key={m.id} className="border-b border-gray-800 align-top hover:bg-gray-800/60 transition">
-                      <td className="p-3"><img src={m.images[0]?.src} alt={m.name} className="w-24 h-16 object-cover rounded shadow border border-gray-700" /></td>
-                      {editId === m.id ? (
-                        <>
-                          <td className="p-3"><input name="name" value={editModel.name as string} onChange={handleEditChange} className="border-2 border-yellow-400 bg-gray-800 text-white p-1 rounded w-40 focus:outline-none focus:ring-2 focus:ring-yellow-400" /></td>
-                          <td className="p-3"><input name="basePrice" type="number" value={editModel.basePrice as number} onChange={handleEditChange} className="border-2 border-yellow-400 bg-gray-800 text-white p-1 rounded w-24 focus:outline-none focus:ring-2 focus:ring-yellow-400" /></td>
-                          <td className="p-3"><input name="stock" type="number" value={editModel.stock as number} onChange={handleEditStock} className="border-2 border-yellow-400 bg-gray-800 text-white p-1 rounded w-16 focus:outline-none focus:ring-2 focus:ring-yellow-400" /></td>
-                          <td className="p-3"><textarea name="description" value={editModel.description as string} onChange={handleEditChange} className="border-2 border-yellow-400 bg-gray-800 text-white p-1 rounded w-56 focus:outline-none focus:ring-2 focus:ring-yellow-400" /></td>
-                          <td className="p-3 text-center flex flex-col gap-2">
-                            <button onClick={handleSaveEdit} className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded font-semibold shadow transition">Enregistrer</button>
-                            <button onClick={handleCancelEdit} className="bg-gray-400 hover:bg-gray-500 text-white px-3 py-1 rounded font-semibold shadow transition">Annuler</button>
-                          </td>
-                        </>
-                      ) : (
-                        <>
-                          <td className="p-3 text-white font-semibold">{m.name}</td>
-                          <td className="p-3 text-yellow-300 font-bold">{m.basePrice} €</td>
-                          <td className="p-3 text-white">{m.stock}</td>
-                          <td className="p-3 max-w-xs truncate text-gray-300" title={m.description}>{m.description}</td>
-                          <td className="p-3 text-center">
-                            <button onClick={() => handleEdit(m)} className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-semibold shadow transition">Modifier</button>
-                          </td>
-                        </>
-                      )}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
+        
         {section === "orders" && (
           <div>
             <h1 className="text-3xl font-extrabold mb-8 text-yellow-400">Commandes</h1>

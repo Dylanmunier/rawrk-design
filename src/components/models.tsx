@@ -37,7 +37,7 @@ export function Models() {
             </CardContent>
             <CardFooter className="p-6 pt-0 flex justify-between items-center">
                <p className="text-lg font-semibold text-foreground">
-                  From {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(model.basePrice)}
+                  From {new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(model.basePrice)}
                 </p>
               <Button asChild>
                 <Link href={`/configurator?model=${model.id}`}>

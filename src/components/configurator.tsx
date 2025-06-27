@@ -210,7 +210,7 @@ export function Configurator({ selectedModelId: initialModelId }: { selectedMode
                         <RadioGroupItem value={option.value} id={option.value} />
                         {option.icon && <option.icon className="w-6 h-6" />}
                         <span className="flex-grow">{option.label}</span>
-                        <span className="text-muted-foreground text-sm">+{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(option.price)}</span>
+                        <span className="text-muted-foreground text-sm">+{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(option.price)}</span>
                       </Label>
                     ))}
                   </RadioGroup>
@@ -222,7 +222,7 @@ export function Configurator({ selectedModelId: initialModelId }: { selectedMode
                     {COMFORT_OPTIONS.map(option => (
                       <div key={option.value} className="flex items-center justify-between p-4 rounded-lg border bg-card">
                         <Label htmlFor={option.value} className="flex-grow cursor-pointer">{option.label}</Label>
-                        <span className="text-muted-foreground text-sm mr-4">+{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(option.price)}</span>
+                        <span className="text-muted-foreground text-sm mr-4">+{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(option.price)}</span>
                         <Checkbox
                           id={option.value}
                           checked={selections.comfort.some(c => c.value === option.value)}
@@ -284,15 +284,15 @@ export function Configurator({ selectedModelId: initialModelId }: { selectedMode
             <h3 className="font-headline text-2xl font-semibold">Price Summary</h3>
             <div className="flow-root text-muted-foreground">
                 <dl className="space-y-2">
-                    <div className="flex items-center justify-between"><dt>Base Vehicle</dt><dd className="font-medium text-foreground">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(currentModel.basePrice)}</dd></div>
-                    <div className="flex items-center justify-between"><dt>Options Mercedes</dt><dd className="font-medium text-foreground">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(optionsPrice)}</dd></div>
-                    <div className="flex items-center justify-between"><dt>Delivery</dt><dd className="font-medium text-foreground">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(DELIVERY_COST)}</dd></div>
+                    <div className="flex items-center justify-between"><dt>Base Vehicle</dt><dd className="font-medium text-foreground">{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(currentModel.basePrice)}</dd></div>
+                    <div className="flex items-center justify-between"><dt>Options Mercedes</dt><dd className="font-medium text-foreground">{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(optionsPrice)}</dd></div>
+                    <div className="flex items-center justify-between"><dt>Delivery</dt><dd className="font-medium text-foreground">{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(DELIVERY_COST)}</dd></div>
                 </dl>
             </div>
             <Separator />
             <div className="flex items-center justify-between text-2xl font-bold font-headline">
                 <dt>Total</dt>
-                <dd className="text-accent">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(totalPrice)}</dd>
+                <dd className="text-accent">{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 }).format(totalPrice)}</dd>
             </div>
              <Button size="lg" className="w-full mt-2 font-bold text-lg" asChild>
                 <Link href="/shop">
